@@ -12,14 +12,24 @@ def collect_sources_impl(target, ctx):
     files = []
     if hasattr(ctx.rule.attr, 'srcs'):
         for src in ctx.rule.attr.srcs:
-            for file in src.files:
+            for file in src.files.to_list():
                 if file.extension == 'java':
                     files.append(file)
+
+    if hasattr(ctx.rule.attr, 'deps'):
+        for dep in ctx.rule.attr.deps:
+          files = files + dep[JavaSourceFiles].files
+
+    if hasattr(ctx.rule.attr, 'runtime_deps'):
+        for dep in ctx.rule.attr.runtime_deps:
+          files = files + dep[JavaSourceFiles].files
+    
     return [JavaSourceFiles(files = files)]
 
 
 collect_sources = aspect(
     implementation = collect_sources_impl,
+    attr_aspects = ['deps', 'runtime_deps']
 )
 
 
@@ -34,8 +44,8 @@ def _checkstyle_test_impl(ctx):
     sopts = ctx.attr.string_opts
 
     # Checkstyle and its dependencies
-    checkstyle_dependencies = ctx.attr._checkstyle.java.transitive_runtime_deps
-    classpath = ":".join([file.path for file in checkstyle_dependencies])
+    checkstyle_dependencies = ctx.attr._checkstyle[JavaInfo].transitive_runtime_deps
+    classpath = ":".join([file.path for file in checkstyle_dependencies.to_list()])
 
     args = ""
     inputs = []
