@@ -17,8 +17,8 @@ Example:
 
 `WORKSPACE`:
 ```
-load("@checkstyle_java//checkstyle:checkstyle.bzl", "checkstyle_dependencies")
-checkstyle_dependencies()
+load("@checkstyle_java//checkstyle:repo.bzl", "checkstyle_deps")
+checkstyle_deps()
 ```
 
 `BUILD`:
@@ -63,8 +63,7 @@ will exit with non-zero code and print out non-covered targets.
 ## Configuring Checkstyle
 
 Checkstyle is configured by an XML file. By default, current rule implementation uses
-`//tools/checkstyle:config.xml` which is based on Google Java style 
+`//checkstyle:checkstyle.xml` which is based on Google Java style 
 with added checks of license header 
-(via [`RegexpHeader`](http://checkstyle.sourceforge.net/config_header.html#RegexpHeader) 
-and `//tools/checkstyle:license-header.txt`) and package header 
+`//checkstyle/checkstyle:license-header.txt`) and package header 
 (via [`PackageName`](http://checkstyle.sourceforge.net/config_naming.html#PackageName))
