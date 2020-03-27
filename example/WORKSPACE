@@ -1,0 +1,7 @@
+local_repository(
+  name = "checkstyle_java",
+  path = "..",
+)
+
+load("@checkstyle_java//:repo.bzl", "checkstyle_deps")
+checkstyle_deps()
