@@ -1,8 +1,8 @@
-package hello.world;
+package example;
 
 public class Greeter {
 
   public String greet() {
-    return "HelloWorld";
+    return "Hello World!";
   }
 }

@@ -1,6 +1,6 @@
-package hello.world;
+package example;
 
-import hello.world.Greeter;
+import example.Greeter;
 
 public class HelloWorld {
   public static void main(String[] args) {

@@ -5,8 +5,6 @@ ALLOW_FAILURE="{allow_failure}"
 
 echo "ALLOW_FAILURE IS $ALLOW_FAILURE"
 
-source ~/.bash_profile
-
 ${COMMAND}
 result=$?
 

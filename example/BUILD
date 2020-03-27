@@ -17,7 +17,7 @@ java_library(
 
 java_binary(
   name = "HelloWorld",
-  main_class = "hello.world.HelloWorld",
+  main_class = "example.HelloWorld",
   runtime_deps = [":hello_world"],
 )
 
